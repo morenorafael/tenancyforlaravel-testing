@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Traits;
+namespace Morenorafael\TenancyforlaravelTesting\Traits;
 
 trait DeleteDatebase
 {
