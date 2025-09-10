@@ -51,7 +51,7 @@ abstract class TenantDuskTestCase extends BaseTestCase
         });
 
         $tenant = Tenant::create(['id' => 'foo']);
-        $tenant->domains()->create(['domain' => 'foo' . config('app.base_url')]);
+        $tenant->domains()->create(['domain' => 'foo.' . config('app.base_url')]);
 
         tenancy()->initialize($tenant);
     }
