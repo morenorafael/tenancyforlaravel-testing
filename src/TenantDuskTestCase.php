@@ -45,8 +45,8 @@ abstract class TenantDuskTestCase extends BaseTestCase
                 ->type('@email', $user->email)
                 ->waitFor('@password')
                 ->type('@password', 'password')
-                ->waitFor('@submit')
-                ->press('@submit')
+                ->waitFor('@btn-login')
+                ->press('@btn-login')
                 ->pause(1000);
         });
 
