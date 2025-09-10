@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Morenorafael\TenancyforlaravelTesting\Tests;
 
 use App\Models\Tenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Morenorafael\TenancyforlaravelTesting\Tests;
 
 use App\Models\Tenant;
 use App\Models\User;
@@ -66,7 +66,7 @@ abstract class TenantDuskTestCase extends BaseTestCase
         try {
             DB::statement("DROP SCHEMA IF EXISTS \"$tenantId\" CASCADE");
         } catch (\Exception $e) {
-            dump('Error reseteando el esquema del tenant: '.$e->getMessage());
+            dump('Error reseteando el esquema del tenant: ' . $e->getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ abstract class TenantDuskTestCase extends BaseTestCase
         $options = (new ChromeOptions)->addArguments(collect([
             $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
             '--disable-search-engine-choice-screen',
-            '--user-data-dir='.sys_get_temp_dir().'/chrome-'.uniqid(),
+            '--user-data-dir=' . sys_get_temp_dir() . '/chrome-' . uniqid(),
         ])->unless($this->hasHeadlessDisabled(), function (Collection $items) {
             return $items->merge([
                 '--disable-gpu',
@@ -100,7 +100,8 @@ abstract class TenantDuskTestCase extends BaseTestCase
         return RemoteWebDriver::create(
             $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $options
+                ChromeOptions::CAPABILITY,
+                $options
             )
         );
     }
