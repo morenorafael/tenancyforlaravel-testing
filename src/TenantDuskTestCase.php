@@ -7,7 +7,6 @@ use App\Models\User;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +16,6 @@ use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class TenantDuskTestCase extends BaseTestCase
 {
-    use DatabaseMigrations;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -44,17 +41,17 @@ abstract class TenantDuskTestCase extends BaseTestCase
 
         Browser::macro('actingAs', function (User $user) {
             return $this->visit(route_tenant('login'))
-                ->waitFor('#email')
-                ->type('#email', $user->email)
-                ->waitFor('#password')
-                ->type('#password', 'Rs85jZf4|E}')
-                ->waitFor('#submit')
-                ->press('#submit')
+                ->waitFor('@email')
+                ->type('@email', $user->email)
+                ->waitFor('@password')
+                ->type('@password', 'password')
+                ->waitFor('@submit')
+                ->press('@submit')
                 ->pause(1000);
         });
 
         $tenant = Tenant::create(['id' => 'foo']);
-        $tenant->domains()->create(['domain' => 'foo.localhost']);
+        $tenant->domains()->create(['domain' => 'foo' . config('app.base_url')]);
 
         tenancy()->initialize($tenant);
     }
